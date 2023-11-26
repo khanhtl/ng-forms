@@ -25,7 +25,7 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatCheckboxModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

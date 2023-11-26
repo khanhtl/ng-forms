@@ -9,29 +9,69 @@
     <div class="row-control">
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
-        <input matInput placeholder="Username" [(ngModel)]="userInfo.username" name="username" />
+        <input
+          #username="ngModel"
+          matInput
+          placeholder="Username"
+          required
+          minlength="6"
+          maxlength="32"
+          [pattern]="usernamePattern"
+          [(ngModel)]="userInfo.username"
+          name="username"
+        />
+        <mat-error *ngIf="username.touched && !username.valid">
+          <span *ngIf="username.errors?.['required']"
+            >Username is required</span
+          >
+          <span
+            *ngIf="username.errors?.['minlength'] || username.errors?.['maxlength']"
+            >Length from 6 to 32 characters</span
+          >
+          <span
+            *ngIf="!(username.errors?.['minlength'] || username.errors?.['maxlength']) && username.errors?.['pattern']"
+            >Only alphabet</span
+          >
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row-control">
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input
+          #password="ngModel"
           type="password"
           matInput
           placeholder="Password"
           [(ngModel)]="userInfo.password"
+          required
+          minlength="6"
+          maxlength="32"
+          [pattern]="passwordPattern"
           name="password"
         />
+        <mat-error *ngIf="password.touched && !password.valid">
+          <span *ngIf="password.errors?.['required']"
+            >Password is required</span
+          >
+          <span
+            *ngIf="password.errors?.['minlength'] || password.errors?.['maxlength']"
+            >Length from 6 to 32 characters</span
+          >
+          <span
+            *ngIf="!(password.errors?.['minlength'] || password.errors?.['maxlength']) && password.errors?.['pattern']"
+            >Only alphabet, digit and at least one of !@#$%^&*</span
+          >
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row-control">
-      <mat-checkbox [(ngModel)]="userInfo.rememberMe" name="rememberMe">Remember me</mat-checkbox>
+      <mat-checkbox [(ngModel)]="userInfo.rememberMe" name="rememberMe"
+        >Remember me</mat-checkbox
+      >
     </div>
     <div class="row-control row-actions">
       <button mat-raised-button color="primary" type="submit">Sign in</button>
     </div>
-
-    <pre>{{ signInForm.value | json }}</pre>
-    <pre>{{ userInfo | json }}</pre>
   </form>
 </div>
