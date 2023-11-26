@@ -1,0 +1,14 @@
+ul {
+    display: flex;
+}
+li {
+    list-style: none;
+    margin-right: 16px;
+    a {
+        text-decoration: none;
+        color: #333;
+    }
+}
+.router-link-active {
+    color: blue !important;
+}

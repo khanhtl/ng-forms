@@ -20,7 +20,7 @@
           [(ngModel)]="userInfo.username"
           name="username"
         />
-        <mat-error *ngIf="username.touched && !username.valid">
+        <mat-error *ngIf="!username.valid">
           <span *ngIf="username.errors?.['required']"
             >Username is required</span
           >
@@ -50,7 +50,7 @@
           [pattern]="passwordPattern"
           name="password"
         />
-        <mat-error *ngIf="password.touched && !password.valid">
+        <mat-error *ngIf="!password.valid">
           <span *ngIf="password.errors?.['required']"
             >Password is required</span
           >
@@ -73,5 +73,6 @@
     <div class="row-control row-actions">
       <button mat-raised-button color="primary" type="submit">Sign in</button>
     </div>
+    <pre>{{ signInForm.value | json }}</pre>
   </form>
 </div>
