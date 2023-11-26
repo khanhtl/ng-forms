@@ -15,7 +15,7 @@
             >Username is required</span
           >
           <span
-            *ngIf="signInForm.get('username')?.errors?.['minlength'] || signInForm.get('username')?.errors?.['maxlength']"
+            *ngIf="!signInForm.get('username')?.errors?.['required'] && signInForm.get('username')?.errors?.['minlength'] || signInForm.get('username')?.errors?.['maxlength']"
             >Length from 6 to 32 characters</span
           >
           <span
@@ -24,6 +24,7 @@
           >
         </mat-error>
       </mat-form-field>
+      <pre>{{signInForm.get('username')?.errors | json}}</pre>
     </div>
     <div class="row-control">
       <mat-form-field appearance="outline">
