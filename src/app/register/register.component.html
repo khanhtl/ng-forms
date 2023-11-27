@@ -1,0 +1,95 @@
+<div class="container">
+  <form
+    class="register-form"
+    [formGroup]="registerForm"
+    autocomplete="off"
+    (ngSubmit)="submitSubject$.next()"
+  >
+    <h2>Register</h2>
+    <div class="row-control">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" formControlName="username" />
+        <mat-error *ngIf="!registerForm.get('username')?.valid">
+          <span *ngIf="registerForm.get('username')?.errors?.['required']"
+            >Username is required</span
+          >
+          <span
+            *ngIf="!registerForm.get('username')?.errors?.['required'] && registerForm.get('username')?.errors?.['minlength'] || registerForm.get('username')?.errors?.['maxlength']"
+            >Length from 6 to 32 characters</span
+          >
+          <span
+            *ngIf="!(registerForm.get('username')?.errors?.['minlength'] || registerForm.get('username')?.errors?.['maxlength']) && registerForm.get('username')?.errors?.['pattern']"
+            >Only alphabet</span
+          >
+          <span
+            *ngIf="registerForm.get('username')?.errors?.['usernameDuplicated']"
+            >Duplicate username</span
+          >
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <ng-container formGroupName="passwords">
+      <div class="row-control">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            type="password"
+            matInput
+            placeholder="Password"
+            formControlName="password"
+          />
+          <mat-error *ngIf="!registerForm.get('passwords')?.get('password')?.valid">
+            <span *ngIf="registerForm.get('passwords')?.get('password')?.errors?.['required']"
+              >Password is required</span
+            >
+            <span
+              *ngIf="registerForm.get('passwords')?.get('password')?.errors?.['minlength'] || registerForm.get('passwords')?.get('password')?.errors?.['maxlength']"
+              >Length from 6 to 32 characters</span
+            >
+            <span
+              *ngIf="!(registerForm.get('passwords')?.get('password')?.errors?.['minlength'] || registerForm.get('passwords')?.get('password')?.errors?.['maxlength']) && registerForm.get('passwords')?.get('password')?.errors?.['pattern']"
+              >Only alphabet, digit and at least one of !@#$%^&*</span
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input
+            type="password"
+            matInput
+            placeholder="Confirm Password"
+            formControlName="confirmPassword"
+          />
+          <mat-error *ngIf="!registerForm.get('passwords')?.get('confirmPassword')?.valid || registerForm.get('passwords')?.errors?.['valueNotMatch']">
+            <span *ngIf="registerForm.get('passwords')?.get('password')?.errors?.['required']"
+              >Confirm Password is required</span
+            >
+            <span
+              *ngIf="registerForm.get('passwords')?.get('confirmPassword')?.errors?.['minlength'] || registerForm.get('passwords')?.get('confirmPassword')?.errors?.['maxlength']"
+              >Length from 6 to 32 characters</span
+            >
+            <span
+              *ngIf="!(registerForm.get('passwords')?.get('confirmPassword')?.errors?.['minlength'] || registerForm.get('passwords')?.get('confirmPassword')?.errors?.['maxlength']) && registerForm.get('passwords')?.get('confirmPassword')?.errors?.['pattern']"
+              >Only alphabet, digit and at least one of !@#$%^&*</span
+            >
+            <span *ngIf="registerForm.get('passwords')?.errors?.['valueNotMatch']">Password not match</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </ng-container>
+    <div class="row-control row-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="registerForm.invalid"
+      >
+        Register
+      </button>
+    </div>
+    <pre>{{ registerForm.value | json }}</pre>
+  </form>
+</div>

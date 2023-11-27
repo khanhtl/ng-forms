@@ -12,8 +12,8 @@ import {CustomRequiredValidator, CustomMinLengthValidator} from '../custom-valid
   styleUrls: ['./sign-in-rf.component.scss'],
 })
 export class SignInRfComponent {
-  private readonly fb = inject(FormBuilder);
-  signInForm = this.fb.group({
+  private readonly _fb = inject(FormBuilder);
+  signInForm = this._fb.group({
     username: [
       '',
       Validators.compose([
